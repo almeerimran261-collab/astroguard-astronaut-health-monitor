@@ -1,0 +1,10 @@
+crew_id,mission_day,column,issue,original_value,action
+Crew-19,136,sleep_hours,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-03,73,sleep_quality,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-05,177,resting_heart_rate,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-07,38,resting_heart_rate,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-09,149,fatigue_score,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-01,172,reaction_time_ms,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-05,150,reaction_time_ms,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-12,137,reaction_time_ms,missing value,,"kept blank (lower alert confidence, show warning)"
+Crew-19,9,resting_heart_rate,impossible value (valid range 30-200),255.0,set to blank (sensor error)
