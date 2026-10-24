@@ -1,0 +1,5 @@
+relationship,variable_1,variable_2,pearson_correlation,paired_records
+Sleep and fatigue,sleep_hours,fatigue_score,-0.12213995689718761,3598
+Workload and stress,workload_hours,stress_score,0.4977801934375898,3600
+Fatigue and reaction time,fatigue_score,reaction_time_ms,0.4411362701751772,3596
+Stress and resting heart rate,stress_score,resting_heart_rate,0.24580902369331506,3597
