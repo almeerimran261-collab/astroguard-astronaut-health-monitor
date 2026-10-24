@@ -1,0 +1,12 @@
+column,dtype,non_missing_count,missing_count,unique_values
+crew_id,str,3600,0,20
+mission_day,int64,3600,0,180
+timestamp,datetime64[us],3600,0,180
+sleep_hours,float64,3599,1,52
+sleep_quality,float64,3599,1,9
+resting_heart_rate,float64,3597,3,31
+exercise_minutes,int64,3600,0,75
+fatigue_score,float64,3599,1,9
+stress_score,int64,3600,0,9
+reaction_time_ms,float64,3597,3,216
+workload_hours,float64,3600,0,84

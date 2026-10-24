@@ -1,0 +1,12 @@
+column,missing_count,missing_percent
+crew_id,0,0.0
+mission_day,0,0.0
+timestamp,0,0.0
+sleep_hours,1,0.028
+sleep_quality,1,0.028
+resting_heart_rate,3,0.083
+exercise_minutes,0,0.0
+fatigue_score,1,0.028
+stress_score,0,0.0
+reaction_time_ms,3,0.083
+workload_hours,0,0.0

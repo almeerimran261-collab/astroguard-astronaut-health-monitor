@@ -1,0 +1,9 @@
+variable,count,min,max,mean,median,std,interpretation
+sleep_hours,3599.0,3.6,9.0,7.170325090302862,7.2,0.6695951170682568,Observed in this simulated dataset; not a clinical reference range
+sleep_quality,3599.0,2.0,10.0,7.0889135871075295,7.0,1.2800634507929785,Observed in this simulated dataset; not a clinical reference range
+resting_heart_rate,3597.0,51.0,82.0,67.3185988323603,67.0,5.190768034299471,Observed in this simulated dataset; not a clinical reference range
+exercise_minutes,3600.0,14.0,96.0,57.66305555555556,58.0,11.845470319868499,Observed in this simulated dataset; not a clinical reference range
+fatigue_score,3599.0,1.0,9.0,3.83023061961656,4.0,1.3698158533509674,Observed in this simulated dataset; not a clinical reference range
+stress_score,3600.0,1.0,9.0,3.2666666666666666,3.0,1.4395284955584826,Observed in this simulated dataset; not a clinical reference range
+reaction_time_ms,3597.0,356.0,640.0,468.8648874061718,464.0,40.8720239305299,Observed in this simulated dataset; not a clinical reference range
+workload_hours,3600.0,5.0,13.6,8.56025,8.6,1.1884226384591097,Observed in this simulated dataset; not a clinical reference range
