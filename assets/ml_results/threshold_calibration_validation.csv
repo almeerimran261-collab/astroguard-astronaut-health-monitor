@@ -1,0 +1,5 @@
+threshold,event_precision,event_recall,false_alarm_events,false_alarms_per_100_crew_days,median_detection_delay,predicted_events
+2.0,0.36,1.0,16,2.2222222222222223,0.0,25
+2.5,0.6428571428571429,1.0,5,0.6944444444444444,1.0,14
+3.0,0.7692307692307693,1.0,3,0.4166666666666667,2.0,13
+3.5,0.9,1.0,1,0.1388888888888889,3.0,10

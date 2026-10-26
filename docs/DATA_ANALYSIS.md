@@ -2,100 +2,141 @@
 
 ## 1. Purpose
 
-This report describes the simulated astronaut health and performance measurements. It checks data quality, summarizes the variables, looks for patterns over mission days, compares measurements with personal baselines, and suggests signals the ML member could monitor. This is exploratory analysis, not a medical assessment.
+This analysis explores the simulated astronaut health and performance
+dataset to describe its structure, summarize its measurements, examine
+changes over mission days, compare measurements against personal
+baselines, and recommend candidate monitoring signals.
 
-## 2. Dataset overview
+## 2. Dataset Overview
 
-- **Number of rows:** 3,600
-- **Number of columns:** 11
-- **Crew members:** 20
-- **Mission duration:** days 1–180
-- **Variables:** crew ID, mission day, timestamp, sleep hours, sleep quality, resting heart rate, exercise minutes, fatigue score, stress score, reaction time, and workload hours.
-- **Missing measurements:** 9 cells across the dataset. Columns with missing values: `sleep_hours` (1), `sleep_quality` (1), `resting_heart_rate` (3), `fatigue_score` (1), `reaction_time_ms` (3).
-- **Duplicate rows:** 0
-- **Ground-truth labels:** not used.
+- Number of rows: 3600
+- Number of original columns: 11
+- Number of crew members: 20
+- Mission-day range: 1–180
+- Missing cells: 9
+- Duplicate complete rows: 0
+- Source file: `data/processed/astronaut_health.csv`
 
-Each crew member has 180 unique mission days at minimum. The dataset contains simulated daily records, so its patterns should not be treated as clinical evidence.
+### Missing Values
 
-## 3. Summary statistics
+- sleep_hours: 1
+- sleep_quality: 1
+- resting_heart_rate: 3
+- fatigue_score: 1
+- reaction_time_ms: 3
 
-| Measurement | Mean | Median | Minimum | Maximum | Standard deviation |
-|---|---:|---:|---:|---:|---:|
-| Sleep hours | 7.17 | 7.20 | 3.60 | 9.00 | 0.67 |
-| Sleep quality | 7.09 | 7.00 | 2.00 | 10.00 | 1.28 |
-| Resting heart rate | 67.32 | 67.00 | 51.00 | 82.00 | 5.19 |
-| Exercise minutes | 57.66 | 58.00 | 14.00 | 96.00 | 11.85 |
-| Fatigue score | 3.83 | 4.00 | 1.00 | 9.00 | 1.37 |
-| Stress score | 3.27 | 3.00 | 1.00 | 9.00 | 1.44 |
-| Reaction time (ms) | 468.86 | 464.00 | 356.00 | 640.00 | 40.87 |
-| Workload hours | 8.56 | 8.60 | 5.00 | 13.60 | 1.19 |
+### Data Quality
 
-These are observed values in this dataset, not medical reference ranges. Unusually low or high values should be checked and kept for review rather than automatically deleted, because they may be simulated events.
+The dataset was checked for missing values, duplicate rows, duplicate
+crew-day combinations, crew coverage, and unusual measurement ranges.
+See the supporting CSV files in the `assets` directory.
 
-## 4. Personal differences
+## 3. Summary Statistics
 
-Across crew-level averages, sleep ranges from 6.62 to 7.88 hours; fatigue from 2.01 to 5.24; and reaction time from 428.1 to 523.3 ms. This supports comparing each person with their own baseline instead of treating one value as normal for everyone.
+| variable | count | mean | median | std | min | 25% | 50% | 75% | max |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sleep_hours | 3599.0 | 7.17 | 7.2 | 0.67 | 3.6 | 6.8 | 7.2 | 7.6 | 9.0 |
+| sleep_quality | 3599.0 | 7.089 | 7.0 | 1.28 | 2.0 | 6.0 | 7.0 | 8.0 | 10.0 |
+| resting_heart_rate | 3597.0 | 67.319 | 67.0 | 5.191 | 51.0 | 64.0 | 67.0 | 71.0 | 82.0 |
+| exercise_minutes | 3600.0 | 57.663 | 58.0 | 11.845 | 14.0 | 50.0 | 58.0 | 66.0 | 96.0 |
+| fatigue_score | 3599.0 | 3.83 | 4.0 | 1.37 | 1.0 | 3.0 | 4.0 | 5.0 | 9.0 |
+| stress_score | 3600.0 | 3.267 | 3.0 | 1.44 | 1.0 | 2.0 | 3.0 | 4.0 | 9.0 |
+| reaction_time_ms | 3597.0 | 468.865 | 464.0 | 40.872 | 356.0 | 437.0 | 464.0 | 499.0 | 640.0 |
+| workload_hours | 3600.0 | 8.56 | 8.6 | 1.188 | 5.0 | 7.7 | 8.6 | 9.3 | 13.6 |
 
-The project calculates a separate baseline for each crew member using mission days 1–14. Later measurements are compared with that crew member's baseline. This is more informative than applying one fixed average to all crew members. The first 14 days are only a baseline choice for this assignment, not a validated clinical baseline.
+These values describe the simulated dataset. They are not clinical
+reference ranges.
 
-## 5. Time-series observations
+## 4. Personal Differences
 
-The four single-crew charts show sleep, fatigue, workload, and reaction time across mission days for Crew-01. Four additional charts show daily averages across all crew members for fatigue, reaction time, sleep, and workload. The observations below compare six 30-day periods; they describe this dataset and should not be treated as medical conclusions.
+The lowest average sleep duration was observed for Crew-18
+(6.619 hours).
 
-- Average sleep was lowest in **Days 31-60** (7.11 hours) and highest in **Days 1-30** (7.24 hours) when comparing six 30-day periods.
-- Average fatigue was lowest in **Days 1-30** (3.76 score points) and highest in **Days 31-60** (3.94 score points) when comparing six 30-day periods.
-- Average reaction time was lowest in **Days 1-30** (466.85 ms) and highest in **Days 31-60** (472.33 ms) when comparing six 30-day periods.
-- Average workload was lowest in **Days 31-60** (8.46 hours) and highest in **Days 91-120** (8.79 hours) when comparing six 30-day periods.
+The highest average sleep duration was observed for Crew-02
+(7.877 hours).
 
-The dataset-wide observed ranges include sleep from 3.6 to 9.0 hours, fatigue from 1.0 to 9.0, and reaction time from 356 to 640 ms. Higher reaction time means slower performance, as stated in the assignment guide. Daily averages can hide individual changes, so review the single-crew plots alongside group averages.
+Individual baselines calculated from mission days 1–14 are saved in
+`assets/personal_baselines_days_1_14.csv`. Personal baselines are useful
+because different crew members can have different usual measurements.
 
-## 6. Relationships between variables
+## 5. Time-Series Observations
 
-- **Sleep and fatigue**: Pearson r = -0.122 (paired records = 3598).
-- **Workload and stress**: Pearson r = 0.498 (paired records = 3600).
-- **Fatigue and reaction time**: Pearson r = 0.441 (paired records = 3596).
-- **Stress and resting heart rate**: Pearson r = 0.246 (paired records = 3597).
+Average measurements by 30-day period:
 
-A correlation describes how two variables move together in this simulated dataset. It does not prove that one variable causes another. The correlation heatmap shows the pairwise relationships among the eight numeric measurements. Relationships may reflect assumptions used to create the simulated data.
+| mission_period | sleep_hours | sleep_quality | resting_heart_rate | exercise_minutes | fatigue_score | stress_score | reaction_time_ms | workload_hours |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Days 1–30 | 7.239 | 6.983 | 67.321 | 57.647 | 3.762 | 3.252 | 466.855 | 8.582 |
+| Days 31–60 | 7.107 | 7.117 | 67.317 | 57.56 | 3.938 | 3.293 | 472.332 | 8.463 |
+| Days 61–90 | 7.141 | 7.082 | 67.182 | 57.635 | 3.853 | 3.212 | 468.352 | 8.54 |
+| Days 91–120 | 7.158 | 7.135 | 67.668 | 56.592 | 3.813 | 3.48 | 468.653 | 8.79 |
+| Days 121–150 | 7.169 | 7.168 | 67.17 | 58.143 | 3.818 | 3.208 | 468.448 | 8.467 |
+| Days 151–180 | 7.207 | 7.048 | 67.254 | 58.402 | 3.797 | 3.155 | 468.548 | 8.519 |
 
-## 7. Possible monitoring signals
+Individual and crew-wide time-series charts are saved in
+`assets/analysis_charts/`.
 
-The ML member could investigate these candidate signals:
+Observations from the mission-period summaries
 
-- Sleep stays below an individual's days 1–14 baseline for several consecutive days.
-- Fatigue increases over multiple days compared with the person's usual pattern.
-- Reaction time becomes slower than the individual's baseline.
-- Workload rises while exercise minutes fall.
-- Several indicators change together over the same period.
-- Missing or out-of-range measurements appear and may affect an alert.
+Sleep duration: Average sleep was 7.239 hours during days 1–30 and 7.107 hours during days 31–60. It then remained relatively stable, reaching 7.207 hours during days 151–180. These period averages do not show a consistent decline throughout the mission.
 
-The file `possible_sleep_changes.csv` contains exploratory sleep observations whose whole-mission crew-specific z-score has an absolute value above 2. This is only a screening aid. Because it uses each person's entire mission, it must not be used as a real-time, forward-looking alert rule.
+Sleep quality: The period averages ranged from 6.983 to 7.168. The values fluctuated slightly rather than showing a clear sustained increase or decrease.
+
+Fatigue: Average fatigue increased from 3.762 during days 1–30 to 3.938 during days 31–60, then fluctuated within a relatively narrow range for the remaining periods.
+
+Workload: Average workload ranged from 8.463 to 8.790 hours across the six periods. It was highest during days 91–120 and lower during days 121–150.
+
+Reaction time: Average reaction time increased from 466.855 ms during days 1–30 to 472.332 ms during days 31–60. It subsequently remained between approximately 468 and 469 ms for most periods.
+
+Overall interpretation: The 30-day summaries show some variation in the measurements, but they do not establish a continuous deterioration in astronaut health or performance. Individual time-series charts and personal-baseline comparisons should be examined to identify changes that may be hidden by averages.
+
+These are exploratory observations from simulated data. They describe patterns in the reported averages and do not establish medical causes or validated alert thresholds.
+
+## 6. Relationships Between Variables
+
+- **Sleep and fatigue**: r = -0.122; weak negative association; n = 3598.
+- **Workload and stress**: r = 0.498; moderate positive association; n = 3600.
+- **Fatigue and reaction time**: r = 0.441; moderate positive association; n = 3596.
+- **Stress and resting heart rate**: r = 0.246; weak positive association; n = 3597.
+
+These correlations describe associations in the simulated data.
+Correlation does not prove causation.
+
+## 7. Possible Monitoring Signals
+
+Candidate patterns for further investigation include:
+
+- Sleep remaining below an astronaut's personal baseline over several days.
+- Fatigue increasing over time.
+- Reaction time becoming slower than the astronaut's usual level.
+- Workload increasing while exercise decreases.
+- Multiple indicators changing together.
+
+These are candidate monitoring signals, not validated medical alerts.
 
 ## 8. Limitations
 
-- The data is simulated, not collected from real astronauts.
-- Relationships may reflect team-created simulation assumptions.
-- This is not clinical evidence and does not diagnose health conditions.
-- The sample is not representative evidence about astronauts generally.
-- Missing measurements can affect statistics and correlations; pandas calculates each statistic using available values.
-- Correlation does not prove cause and effect.
-- Days 1–14 are an assignment baseline choice, not a validated medical threshold.
-- Exploratory z-scores use the full mission and are not suitable as a real-time prediction method.
-- Observed minimum and maximum values are not official clinical limits.
+- The dataset is simulated.
+- Results are not clinical evidence.
+- The sample is not representative of all astronauts.
+- Correlations do not establish cause and effect.
+- Missing values may affect individual calculations.
+- Exploratory z-scores use the entire mission and therefore include
+  future observations.
+- A baseline calculated from days 1–14 should only be used to evaluate
+  later observations, after that baseline period is complete.
+- The final anomaly-detection method and alert thresholds have not been
+  validated by this exploratory analysis.
 
-## 9. Recommendations for the ML member
+## 9. Recommendations for the ML Member
 
-1. Use the measurement variables as candidate features: sleep hours, sleep quality, resting heart rate, exercise minutes, fatigue, stress, reaction time, and workload.
-2. Calculate personal baselines from mission days 1–14, separately for each `crew_id`.
-3. Compare each future measurement only with information available up to that point. Do not use future days to judge earlier days.
-4. Consider changes over several consecutive days and multiple indicators together, rather than relying only on one unusually high or low reading.
-5. Keep missingness and data-quality checks visible; do not silently replace missing values or delete unusual measurements.
-6. Treat the analysis as evidence for model design, not as a validated alert threshold or clinical decision rule.
-7. Evaluate any later model separately using the approved evaluation process. Ground-truth label files were not used for this exploratory analysis.
+Candidate features include sleep duration, sleep quality, resting heart
+rate, exercise minutes, fatigue score, stress score, reaction time, and
+workload hours.
 
-## Files created
+Use personal baselines calculated from mission days 1–14 for later-day
+comparisons. Avoid future-data leakage when creating training features,
+evaluating predictions, or setting alert thresholds.
 
-- `notebooks/exploratory_analysis.ipynb` — notebook entry point and interpretation guide.
-- `src/exploratory_analysis.py` — repeatable analysis code.
-- `assets/analysis_charts/` — ten saved charts.
-- `assets/analysis_results/` — summary tables, missingness, correlations, baselines, and exploratory changes.
+Investigate sustained changes and combinations of indicators. The ML
+member should select the final detection method, define thresholds, and
+evaluate performance using an appropriate validation strategy.
