@@ -167,4 +167,3 @@ def test_alert_results_contain_required_columns():
 
     for column in required_columns:
         assert column in results.columns
-
