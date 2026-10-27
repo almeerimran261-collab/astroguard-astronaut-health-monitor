@@ -27,3 +27,16 @@ AstroGuard is a hackathon prototype. It is not a medical diagnostic system, it i
 - Plotly
 - Streamlit
 - NASA open-data resources
+## Repository structure
+
+```text
+app/                    Streamlit dashboard
+data/                   Processed data and evaluation files
+docs/                   Methodology, analysis, and project documentation
+notebooks/              Exploratory analysis notebook
+src/                    Data, ML, and evaluation modules
+tests/                  Automated tests
+assets/analysis_charts/ Analysis visualizations
+assets/analysis_results/ Statistical outputs
+assets/ml_results/      ML alerts and evaluation outputs
+
