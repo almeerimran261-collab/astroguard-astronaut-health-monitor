@@ -26,7 +26,7 @@ def build_results(data):
 
     return detect_point_anomalies(
         enriched,
-        threshold=2.0,
+        threshold=3.5,
         baseline_days=14,
     )
 
@@ -167,3 +167,4 @@ def test_alert_results_contain_required_columns():
 
     for column in required_columns:
         assert column in results.columns
+
